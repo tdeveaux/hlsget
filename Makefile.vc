@@ -1,0 +1,10 @@
+hlsget.exe: main.obj
+	LINK /NOLOGO /OUT:hlsget.exe hls\hls.obj main.obj curl\builds\libcurl-vc-x64-release-dll-ipv6-sspi-schannel\lib\libcurl.lib openssl\libcrypto.lib
+	COPY curl\builds\libcurl-vc-x64-release-dll-ipv6-sspi-schannel\bin\libcurl.dll .
+	COPY openssl\libcrypto-1_1-x64.dll .
+
+main.obj: main.c
+	CL /c /Icurl\include /Iopenssl\include /nologo /W4 main.c
+
+clean:
+	DEL *.dll hlsget.exe main.obj
